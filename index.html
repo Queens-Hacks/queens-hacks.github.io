@@ -21,8 +21,13 @@
     a:hover {
       text-decoration: underline;
     }
+    @keyframes blinker {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
     .active:after {
       content: '_';
+      animation: blinker 0.5s cubic-bezier(0.5, 0, 1, 1) infinite alternate;
     }
     .prompt {
       display: block;
@@ -33,13 +38,25 @@
 
 <body>
   <main class="prompt">
-    <p>Queen&apos;s Coding Club: Every Tuesday @ 6:00 pm.</p>
-    <p>Make something, geek out, eat pizza.</p>
-    <p>SparQ Studios, Carruther's Hall, Queen&apos;s University, Kingston.</p>
-
-    <p>Email Jake at <a href="mailto:jakepittis@gmail.com?subject=[qhack]">jakepittis@gmail.com</a> with questions.</p>
-    <p>Join us on our <a href="http://qhack.slack.com/signup">Slack</a> to chat &amp; hang out!</p>
-    <p>Join the <a href="https://www.facebook.com/groups/181145485322145/">Facebook Group</a> for events, invites, and updates</p>
+    <pre data-cmd="ls -lah">
+total 0
+drwxr-xr-x 5 root      qhack    170B  1 Jan 1970 .
+drwxr-xr-x 9 root      qhack    2.7K  1 Jan 1970 ..
+-rw-r--r-- 1 root      qhack    149B  1 Jan 1970 CONTACT
+-rw-r--r-- 1 root      qhack     83B  1 Jan 1970 WHAT
+-rw-r--r-- 1 root      qhack     63B  1 Jan 1970 WHERE</pre>
+    <p data-cmd="cat WHAT">
+      Queen&apos;s Coding Club: Every Tuesday @ 6:00 pm.<br>
+      Make something, geek out, eat pizza.
+    </p>
+    <p data-cmd="cat WHERE">
+      SparQ Studios, Carruther&apos;s Hall, Queen&apos;s University, Kingston.
+    </p>
+    <p data-cmd="cat CONTACT">
+      Email Jake at <a href="mailto:jakepittis@gmail.com?subject=[qhack]">jakepittis@gmail.com</a> with questions.<br>
+      Join us on our <a href="http://qhack.slack.com/signup">Slack</a> to chat &amp; hang out!<br>
+      Join the <a href="https://www.facebook.com/groups/181145485322145/">Facebook Group</a> for events, invites, and updates.
+    </p>
   </main>
 
   <script src="prompt.js"></script>

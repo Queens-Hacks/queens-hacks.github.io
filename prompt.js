@@ -1,7 +1,7 @@
 (function() {
   // Get the information
-  var lines = [].slice.call(document.querySelectorAll('.prompt p'));
-  var texts = lines.map(function(line) { return line.textContent; });
+  var lines = [].slice.call(document.querySelectorAll('.prompt > *'));
+  var cmds = lines.map(function(line) { return line.getAttribute('data-cmd'); });
   var htmls = lines.map(function(line) { return line.innerHTML; });
 
   // Clear every element
@@ -12,11 +12,10 @@
   function typeLine() {
     if (i < lines.length) {
       // Get the information about the line
-      var line = lines[i], text = texts[i], html = htmls[i];
-      var cmd = 'echo "' + text + '"';
+      var line = lines[i], cmd = cmds[i], html = htmls[i];
 
       // Initial line content
-      line.appendChild(document.createTextNode('$ '));
+      line.appendChild(document.createTextNode('root@qhack:~# '));
       line.classList.add('active');
 
       // Print every character
@@ -28,7 +27,7 @@
           line.appendChild(character);
           c++;
 
-          setTimeout(typeChar, 30);
+          setTimeout(typeChar, 70);
         } else {
           // Print the output
           var result = document.createElement('div');
@@ -38,11 +37,16 @@
           line.classList.remove('active');
 
           i++;
-          setTimeout(typeLine, 300);
+          typeLine();
         }
       }
 
-      typeChar();
+      setTimeout(typeChar, 300);
+    } else {
+      var last = document.createElement('p');
+      last.appendChild(document.createTextNode('root@qhack:~# '));
+      last.classList.add('active');
+      document.querySelector('.prompt').appendChild(last);
     }
   }
 
